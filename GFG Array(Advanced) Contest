@@ -1,0 +1,80 @@
+Nearest Perfect Square:
+
+class Geeks
+{
+    public static boolean isPerfectSquare(long number)
+    {
+        long root=(long)Math.sqrt(number);
+        return root*root==number;
+    }
+    public long nearestPerfectSquare(long n)
+    {
+        long smaller;
+	    long greater;
+	    
+	    if(Geeks.isPerfectSquare(n)==true)
+	    {
+	        smaller=(long)Math.sqrt(n)-1;
+	        greater=(long)Math.sqrt(n)+1;
+	    }
+	    else
+	    {
+	        smaller=(long)Math.floor(Math.sqrt(n));
+	        greater=(long)Math.ceil(Math.sqrt(n));
+	    }
+	    
+	    if((long)Math.abs(smaller*smaller-n)<(long)Math.abs(greater*greater-n))
+	    return(smaller*smaller);
+	    else
+	    return(greater*greater);
+    }
+}
+
+
+Repeating and Missing: 
+
+class Geeks
+{
+    public void repeatingAndMissing(int a[],int n)
+    {
+        for(int i = 0; i < n; i++)
+            {
+                if(a[Math.abs(a[i])-1]>0)
+                  a[Math.abs(a[i])-1] = -a[Math.abs(a[i])-1];
+                  else
+                    System.out.print(Math.abs(a[i]) + " ");
+            }
+            
+            for(int i = 0; i < n; i++)
+            {
+                if(a[i] >0)
+                  System.out.print(i+1);
+            }
+    }
+}
+
+
+The Conversion to One:
+
+class Geeks
+{
+    public static long minOperations(long n)
+    {
+        if(n==1) 
+        return 0; //since 1 is already 1
+        if(n==2)
+        return 1; //convert 2 to 1. 1 step
+        if(n==3)
+        return 2; //convert 3 to 2. Then 2 to 1. 2 steps
+        long total=0; //save total steps
+        if(n%2!=0) //if odd
+        {
+              total=1+Math.min(minOperations(n-1),minOperations(n+1)); 
+              //convert n to n-1 or n+1 then minimum of those conversions
+        }
+        else
+        total=1+minOperations(n/2); //convert n to n/2 then count operations required for n/2 to 1
+        
+        return total; //returning total at the end
+    }
+}
